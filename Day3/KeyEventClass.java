@@ -9,6 +9,8 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import io.appium.java_client.MobileElement;
 import io.appium.java_client.TouchAction;
 import io.appium.java_client.android.AndroidDriver;
+import io.appium.java_client.android.nativekey.AndroidKey;
+import io.appium.java_client.android.nativekey.KeyEvent;
 import io.appium.java_client.remote.MobileCapabilityType;
 import io.appium.java_client.touch.TapOptions;
 import io.appium.java_client.touch.WaitOptions;
@@ -30,21 +32,28 @@ public class KeyEventClass {
 		AndroidDriver<MobileElement> driver= new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),cap);
 		
 TouchAction t = new TouchAction(driver);
+
+Thread.sleep(4000);
 		
-		t.tap(PointOption.point(428, 629)).perform();
-		
-		
-		Thread.sleep(2000);
-		t.longPress(PointOption.point(428,629)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3))).release().perform();
-		
-		Thread.sleep(2000);
-		
-		
-		MobileElement e=driver.findElementByXPath("//android.widget.Button[@text='Directions']");
-		
-		Thread.sleep(2000);
-		
-		t.tap(TapOptions.tapOptions().withElement(ElementOption.element(e))).perform();
+driver.findElementByXPath("//android.widget.TextView[@text='Search here']").click();
+
+Thread.sleep(2000);
+
+driver.findElementById("com.google.android.apps.maps:id/search_omnibox_edit_text").sendKeys("N");
+
+driver.pressKey(new KeyEvent(AndroidKey.E));
+
+driver.pressKey(new KeyEvent(AndroidKey.W));
+driver.pressKey(new KeyEvent(AndroidKey.D));
+driver.pressKey(new KeyEvent(AndroidKey.E));
+driver.pressKey(new KeyEvent(AndroidKey.L));
+driver.pressKey(new KeyEvent(AndroidKey.H));
+driver.pressKey(new KeyEvent(AndroidKey.I));
+driver.pressKey(new KeyEvent(AndroidKey.SPACE));
+
+
+driver.pressKey(new KeyEvent(AndroidKey.ENTER));
+
 		
 
 	}
