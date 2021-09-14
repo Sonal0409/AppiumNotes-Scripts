@@ -1,0 +1,118 @@
+package appiumScripts;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+import org.openqa.selenium.ScreenOrientation;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.android.AndroidDriver;
+
+public class NetwrokManagementDemo {
+
+	AndroidDriver<MobileElement> driver;
+	
+	@BeforeTest
+	public void setup() throws MalformedURLException
+	{
+		
+	DesiredCapabilities cap= new DesiredCapabilities();
+	cap.setCapability("deviceName", "443418ec");
+	cap.setCapability("platformName", "Android");
+	cap.setCapability("platformVersion", "8.1.0");
+	cap.setCapability("appPackage", "com.google.android.apps.maps");
+	cap.setCapability("appActivity", "com.google.android.maps.MapsActivity");
+	cap.setCapability("noReset", true);
+	driver = new AndroidDriver<MobileElement>(new URL("http://127.0.0.1:4723/wd/hub"),cap);	
+	}
+	
+	@Test
+	public void demodevice() throws InterruptedException
+	{
+		// lock device
+		
+		/*driver.lockDevice(); // will lock your device
+		Thread.sleep(3000);
+		
+		driver.unlockDevice(); // will unloack your device
+		
+		// Chnaging the orientation
+		
+		driver.rotate(ScreenOrientation.LANDSCAPE);
+		
+		Thread.sleep(2000);
+		
+		driver.rotate(ScreenOrientation.PORTRAIT);
+		
+		driver.openNotifications();
+		*/
+		Thread.sleep(2000);
+		
+		// to check if wifi is enabled or not
+		
+		/*boolean wifi= driver.getConnection().isWiFiEnabled(); // true 
+		
+		if(wifi==true)
+		{
+			//switch it off
+			driver.toggleWifi();
+		}*/
+		
+		// mobile data
+/*		
+boolean data= driver.getConnection().isDataEnabled(); // false 
+		
+		if(data==false)
+		{
+			//switch it ON
+			driver.toggleData();
+		}*/
+		
+		
+		
+boolean data= driver.getConnection().isAirplaneModeEnabled(); // false 
+		
+		if(data==false)
+		{
+			//switch it ON
+			driver.toggleAirplaneMode();
+		}
+		
+
+		
+		
+			//switch it ON or OF
+			driver.toggleLocationServices();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+}
