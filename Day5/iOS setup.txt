@@ -1,0 +1,312 @@
+
+Step1: Install Homebrew using following command:
+
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+Press enter
+Enter your system password
+Press return key
+
+Installation will be successful
+
+****************************
+
+Step 2: Install Node on Mac machine
+
+Check if you already have node and npm
+
+Execute: 
+> node -v 
+> npm -v
+
+Execute following command to install Node which will intern install npm too.
+
+> brew install node
+
+If node already exists, you can upgrade the version by giving:
+
+> brew upgrade node
+
+
+To check where node is installed:
+
+> where node
+
+You will get the location, in my case it is: /usr/local/bin/node
+
+Now go to Appium website and install Appium desktop:
+
+Appium.io/download
+
+Download the .dmg file
+
+After download double click on the dmg file. Setup will be complete.
+
+Move the icon to application folder on Mac.
+
+Now you can launch it from there.
+
+
+Mac will give you error box saying that software is malicious and unauthorized
+
+So close the error box
+
+Now go to Appium in application folder.. right click on it and click on Open, again it will give error box but with open button on it. So then click again
+
+
+*******************************
+
+Install Xcode
+
+Xcode is a development environment for Mac, Using this you can build iOS applications that can be used with various iOS phones or devices.
+
+Before you install Xcode, make sure:
+
+You have the latest version of Apple OS on your system
+
+1. To check this go to ---> apple icon and click on about this Mac, so you see its the latest version
+
+2. Configure Apple ID in account preferences and also login into you account in system preferences
+
+Now you can go to App Store and search for Xcode and then click on get and then install.
+Give password Apple ID that you have
+Download will start.. it will take at least 60 mins to install
+
+Now click on open , Xcode will open
+
+
+**************************
+Now we have to install Xcode command line tools:
+
+> Go to terminal and enter this command
+
+# xcode-select --install
+
+> Now lets install xcpretty (optional component for detailed Xcode output)
+
+# sudo gem install xcpretty
+
+> use sudo otherwise you will get permission denial error
+
+> Install Carthage : it is a dependency manager for Xcode and it is required for webDriver agent for iOS
+
+# brew install carthage
+
+
+This completes installation of Xcode and its dependencies.
+
+******************************
+
+Now let us install Appium doctor utility, which is used to validate our Appium set up is correct or not.
+
+In order to install it use following command :
+
+ # npm install -g appium-doctor
+
+ # appium-doctor --h  >> will give various options to use this utility
+
+  
+Use:
+
+ # appium-doctor --ios
+
+Validation will be done and check following items :
+
+info AppiumDoctor  ✔ The Node.js binary was found at: /usr/local/bin/node
+info AppiumDoctor  ✔ Node version is 16.8.0
+info AppiumDoctor  ✔ Xcode is installed at: /Applications/Xcode.app/Contents/Developer
+info AppiumDoctor  ✔ Xcode Command Line Tools are installed in: /Applications/Xcode.app/Contents/Developer
+info AppiumDoctor  ✔ DevToolsSecurity is enabled.
+info AppiumDoctor  ✔ The Authorization DB is set up properly.
+info AppiumDoctor  ✔ Carthage was found at: /usr/local/bin/carthage. Installed version is: 0.35.0
+info AppiumDoctor  ✔ HOME is set to: /Users/sonal
+info AppiumDoctor ### Diagnostic for necessary dependencies completed, no fix needed. ###
+
+These are the default locations for Xcode and command line tools.
+
+**************************
+
+Build UiCatalog app for simulator
+
+Download the uicatalog and Uikitcatlog app package from 
+
+https://github.com/appium/ios-uicatalog
+
+Go to GitHub and click on free button, click on download zip
+
+Now go to downloaded folder and here you have to build the UiKITcatalog package, which is at the last.
+
+
+**************
+
+Build UiKitcatalog package
+
+> Go to terminal and we have to change directory to the folder which has uikitcatlog
+
+For this 
+
+> on terminal
+ 
+# cd drag and drop the uikitcatlog folder to terminal, its path will come
+
+ # cd /Users/sonal/Downloads/ios-uicatalog-master/UIKitCatalog 
+
+Press enter
+
+Now to build the app.. execute this command
+
+
+ # npm install
+
+The app will be build using Xcode . Its successful now
+
+***********************
+
+Now go to uiKitcatalog folder and expand the arrow by clicking on it
+
+There will be build folder ----> inside it you have---> release folder(Release iphonesimulator)
+
+Under this you will have first file which is .app file
+
+  >> UIKITCatalog-iphonesimulator 
+
+This is installable for the iOS simulator
+
+We will use it for testing the iOS platform
+
+********************************
+
+Let us now start the simulator
+
+Open Xcode --> and go to menu option Xcode --> go to Open Developers tools --> select simulators
+
+By default it will open a device. If you don't want this device
+
+Under Simulator window
+
+Go to File--> open device --> select the OS -->14.5 -- select iPhone 11 ---> it will launch the device
+
+
+*****************
+
+Start Appium inspector session for iOS
+
+Start appium desktop
+
+Click on inspector and create a session so that we can confirm that our set up is correct and working
+
+ Click on automatic server in Appium inspector
+
+ > platformName: iOS
+ >deviceName : iPhone 11 
+
+( go to device-->Home button on top --> settings--->General --> about -->      
+
+Use Name=iPhone or Model name iPhone 11
+
+> AutomationName : XCUITest
+
+> udid. : AED42D08-2889-4E11-A7EA-6E9FB05F6E28
+
+To get udid for a device --> goto terminal --> and execute command
+
+ # instruments -s devices
+
+This will give udid of all the simulators..
+
+Look for iPhone 11 and copy the test in square brackets
+
+iPhone 11 (14.5) [AED42D08-2889-4E11-A7EA-6E9FB05F6E28] (Simulator)
+
+Udid is : AED42D08-2889-4E11-A7EA-6E9FB05F6E28
+
+
+> app : /Users/sonal/Downloads/ios-uicatalog-master/UIKitCatalog/build/Release-iphonesimulator/UIKitCatalog-iphonesimulator.app
+
+For this provide the absolute path of the .app file
+
+Now go to uiKitcatalog folder and expand the arrow by clicking on it
+
+There will be build folder ----> inside it you have---> release folder(Release iphonesimulator)
+
+Under this you will have first file which is .app file
+
+  >> UIKITCatalog-iphonesimulator 
+
+Now go to terminal
+
+Drag the file in terminal , you will get full path
+
+/Users/sonal/Downloads/ios-uicatalog-master/UIKitCatalog/build/Release-iphonesimulator/UIKitCatalog-iphonesimulator.app
+
+ 
+> USE_PREBUILT_WDA : true
+
+Final DC:
+
+
+{
+  "deviceName": "iPhone 11 ",
+  "platformName": "iOS",
+  "automationName": "XCUITest",
+  "app": "/Users/sonal/Downloads/ios-uicatalog-master/UIKitCatalog/build/Release-iphonesimulator/UIKitCatalog-iphonesimulator.app",
+  "udid": "AED42D08-2889-4E11-A7EA-6E9FB05F6E28",
+  "USE_PREBUILT_WDA": "true"
+}
+
+
+iOS Locators:
+
+Attributes of elements is different from android : explain them
+
+
+1. Accessibility Id : for iOS elements accessibility id attribute should be exclusively added by the developer , if it is not available then name attribute value can be equal to accessibility id , but name attribute value can change dynamically in iOS apps generally, so it is not advisable to use the accessibility locator intros case.
+
+It is always better to ask the developer to set explicit accessibility id for elements.
+
+
+2. ClassName locator:
+
+The value of this locator is full name of the uiElement which starts with XCUITest and attribute name is type
+
+3. Id and name locator uses the value of name attribute
+
+4. XPATH : //tagname[@attribute=value]
+
+In iOS, we should avoid using XPATH as ittakes lot of time to find element, here Appium will have to create an xml and traverse through the xml and find the element that is the reason why the  performance path is less in case of iOS application, In android the xml is readily available so XPATH locator can be used.
+ It is better  to use a locator strategy called iOS predicate String which is specific to iOS app and is powered by Apple
+
+iOS predicate String is faster than XPATH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
