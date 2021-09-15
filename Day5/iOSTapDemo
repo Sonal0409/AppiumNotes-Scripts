@@ -1,0 +1,31 @@
+package iOSInstructor;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.touch.offset.PointOption;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class iOSTapDemo {
+    public static void main(String[] args) throws MalformedURLException {
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11");
+        caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        caps.setCapability(MobileCapabilityType.UDID, "AED42D08-2889-4E11-A7EA-6E9FB05F6E28");
+        caps.setCapability(MobileCapabilityType.APP, "/Users/sonal/IdeaProjects/myiOSPractice/src/main/resources/UIKitCatalog-iphonesimulator.app");
+        //caps.setCapability("bundleId","com.example.apple-samplecode.UICatalog");
+        // caps.setCapability("simulatorStartupTimeout", 180000);
+        AppiumDriver driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"),caps);
+        // caps.setCapability(MobileCapabilityType.USE_PREBUILT_WDA, "XCUITest");
+
+        TouchAction ta = new TouchAction(driver);
+
+        ta.tap(PointOption.point(155,118)).perform();
+    }
+}
