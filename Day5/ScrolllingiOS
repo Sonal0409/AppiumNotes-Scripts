@@ -1,0 +1,60 @@
+package iOSInstructor;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.FindsByIosNSPredicate;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.TouchAction;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
+import io.appium.java_client.touch.WaitOptions;
+import io.appium.java_client.touch.offset.ElementOption;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.time.Duration;
+
+public class ScrollingiOS {
+    public static void main(String[] args) throws MalformedURLException, InterruptedException {
+
+
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11");
+        caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        caps.setCapability(MobileCapabilityType.UDID, "AED42D08-2889-4E11-A7EA-6E9FB05F6E28");
+        caps.setCapability(MobileCapabilityType.APP, "/Users/sonal/IdeaProjects/myiOSPractice/src/main/resources/UIKitCatalog-iphonesimulator.app");
+        //caps.setCapability("bundleId","com.example.apple-samplecode.UICatalog");
+        // caps.setCapability("simulatorStartupTimeout", 180000);
+        AppiumDriver driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"), caps);
+        // caps.setCapability(MobileCapabilityType.USE_PREBUILT_WDA, "XCUITest");
+
+        TouchAction ta = new TouchAction(driver);
+
+        MobileElement e1 = (MobileElement) ((FindsByIosNSPredicate) driver)
+                .findElementByIosNsPredicate("name == 'Steppers'");
+
+        MobileElement e2 = (MobileElement) ((FindsByIosNSPredicate) driver)
+                .findElementByIosNsPredicate("name == 'Activity Indicators'");
+
+        ta.press(ElementOption.element(e1)).waitAction(WaitOptions.waitOptions(Duration.ofSeconds(3)))
+                .moveTo(ElementOption.element(e2))
+                .release()
+                .perform();
+
+        MobileElement e3 = (MobileElement) ((FindsByIosNSPredicate) driver)
+                .findElementByIosNsPredicate("name == 'Text Fields'");
+
+        e3.click();
+
+        Thread.sleep(3000);
+
+        MobileElement e4 = (MobileElement)   driver.findElementsByClassName("XCUIElementTypeTextField").get(0);
+
+  e4.sendKeys("appium");
+
+
+
+
+    }
+}
