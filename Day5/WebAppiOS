@@ -1,0 +1,56 @@
+package iOSInstructor;
+
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.net.MalformedURLException;
+import java.net.URL;
+
+public class SwitchFrame {
+    public static void main(String[] args) throws MalformedURLException, InterruptedException {
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11");
+        caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
+        caps.setCapability(MobileCapabilityType.UDID, "AED42D08-2889-4E11-A7EA-6E9FB05F6E28");
+        caps.setCapability(MobileCapabilityType.BROWSER_NAME, "Safari");
+        //caps.setCapability(MobileCapabilityType.APP, "/Users/sonal/IdeaProjects/myiOSPractice/src/main/resources/UIKitCatalog-iphonesimulator.app");
+        //caps.setCapability("bundleId","com.example.apple-samplecode.UICatalog");
+        // caps.setCapability("simulatorStartupTimeout", 180000);
+        AppiumDriver driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"),caps);
+
+  /*      driver.get("https://jqueryui.com/droppable/");
+
+        //driver.manage().window().maximize();
+
+        driver.get("http://m.alibaba.com/ma");
+        WebElement iframeElement = driver.findElementById("alibaba-login-box");
+        driver.context("WEBVIEW_1");
+        driver.switchTo().frame(iframeElement);
+        WebElement loginElement = driver.findElementById("fm-login-id");*/
+        Thread.sleep(10000);
+
+        driver.get("https://jqueryui.com/droppable/");
+
+        Thread.sleep(5000);
+
+       // driver.manage().window().maximize();
+
+        driver.switchTo().frame(0);
+
+        WebElement e1=driver.findElementById("draggable");
+
+        System.out.println(e1.getText());
+
+        WebElement e2= driver.findElementById("droppable");
+
+        System.out.println(e2.getText());
+
+
+
+    }
+}
