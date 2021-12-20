@@ -1,46 +1,45 @@
-package iOSInstructor;
-
-import io.appium.java_client.AppiumDriver;
-import io.appium.java_client.MobileElement;
-import io.appium.java_client.ios.IOSDriver;
-import io.appium.java_client.remote.MobileCapabilityType;
-import org.openqa.selenium.remote.DesiredCapabilities;
+package mypractice;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
-public class myfirst {
+import org.openqa.selenium.remote.DesiredCapabilities;
 
-    public static void main(String[] args) throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
+import io.appium.java_client.AppiumDriver;
+import io.appium.java_client.FindsByIosNSPredicate;
+import io.appium.java_client.MobileElement;
+import io.appium.java_client.ios.IOSDriver;
+import io.appium.java_client.remote.MobileCapabilityType;
+
+public class IOSPredicateStringdemo {
+
+	public static void main(String[] args) throws MalformedURLException {
+		// TODO Auto-generated method stub
+		
+		DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability(MobileCapabilityType.PLATFORM_NAME, "iOS");
-        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone 11");
+        caps.setCapability(MobileCapabilityType.DEVICE_NAME, "iPhone12");
         caps.setCapability(MobileCapabilityType.AUTOMATION_NAME, "XCUITest");
-        caps.setCapability(MobileCapabilityType.UDID, "AED42D08-2889-4E11-A7EA-6E9FB05F6E28");
-        caps.setCapability(MobileCapabilityType.APP, "/Users/sonal/IdeaProjects/myiOSPractice/src/main/resources/UIKitCatalog-iphonesimulator.app");
+        caps.setCapability(MobileCapabilityType.UDID, "99939A4B-CFED-40CD-A016-DF3399476B4A");
+        caps.setCapability(MobileCapabilityType.APP, "/Users/sonal/Downloads/ios-uicatalog-master/UIKitCatalog/build/Release-iphonesimulator/UIKitCatalog-iphonesimulator.app");
         //caps.setCapability("bundleId","com.example.apple-samplecode.UICatalog");
        // caps.setCapability("simulatorStartupTimeout", 180000);
         AppiumDriver driver = new IOSDriver(new URL("http://0.0.0.0:4723/wd/hub"),caps);
-       // caps.setCapability(MobileCapabilityType.USE_PREBUILT_WDA, "XCUITest");
+        
+        // Using predicate String ie: attribute name & its value
+        MobileElement e1 = (MobileElement) ((FindsByIosNSPredicate) driver)
+                .findElementByIosNsPredicate("name == 'Activity Indicators'");
+        System.out.println(e1.getText());
+        // Using predicate String ie: attribute -> name & its value and type & its value
 
-        //AccessibilityId is getting its value from name attribute
-        MobileElement e1 = (MobileElement) driver.findElementByAccessibilityId("Activity Indicators");
-       String text= e1.getText();
-       System.out.println("this is first text from ios" + text);
-       // ByClassName : gets value from type
-        MobileElement e2 = (MobileElement) driver.findElementByClassName("XCUIElementTypeStaticText");
-        System.out.println("Using ClassName" + e2.getText());
+        MobileElement e2 = (MobileElement) ((FindsByIosNSPredicate) driver)
+                .findElementByIosNsPredicate("type == 'XCUIElementTypeStaticText' AND name == 'Activity Indicators'");
+        System.out.println(e2.getText());
 
-        // Byname locator get value from attribute name
-        e2 = (MobileElement) driver.findElementByName("Activity Indicators");
-        System.out.println("Using Name locator" + e2.getText());
+        MobileElement myElement = (MobileElement) ((FindsByIosNSPredicate) driver)
+                .findElementByIosNsPredicate("label CONTAINS \"Activity Indicators\"");
+        System.out.println(myElement.getText());
 
-        // By id gats value from attribute name.. so accessability id, name, id they are same
-        e2 = (MobileElement) driver.findElementById("Activity Indicators");
-        System.out.println("Using id locator" + e2.getText());
+	}
 
-        e2 = (MobileElement) driver.findElementByXPath("//XCUIElementTypeStaticText[@name='Activity Indicators']");
-        System.out.println("Using Xpath locator" + e2.getText());
-
-    }
 }
